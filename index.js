@@ -5,7 +5,6 @@ const app = express();
 var bodyParser = require('body-parser');  
 var urlencodedParser = bodyParser.urlencoded({ extended: false })  
 
-
 var tasks;
 const session = require('express-session');
 var MongoClient = require('mongodb').MongoClient;
