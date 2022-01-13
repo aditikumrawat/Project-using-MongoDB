@@ -9,7 +9,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 var tasks;
 const session = require('express-session');
 var MongoClient = require('mongodb').MongoClient;
-var url = "tour connection url";
+var url = "mongodb+srv://user2:coolpassword@cluster0.flkio.mongodb.net/firstdb?retryWrites=true&w=majority";
 app.set('view engine', 'ejs');
 
 app.use(session({
@@ -37,7 +37,7 @@ app.get('/success', (req, res) => {
     MongoClient.connect(url, function(err, db) {
   if (err) throw err;
   var dbo = db.db("mydb");
-  dbo.collection("tasks").find({user_id:userProfile.id}).toArray(function(err, result) {
+  dbo.collection("notes").find({user_id:userProfile.id}).toArray(function(err, result) {
     if (err) throw err;
     console.log(result);
 	tasks=result;
@@ -53,7 +53,7 @@ app.post('/success',urlencodedParser, (req, res) => {
 		  if (err) throw err;
 		  var dbo = db.db("mydb");
 		  var myobj = { user_id: userProfile.id, text:req.body.text};
-		  dbo.collection("tasks").insertOne(myobj, function(err, data) {
+		  dbo.collection("notes").insertOne(myobj, function(err, data) {
 			if (err) throw err;
 			console.log(userProfile);
 			console.log("1 document inserted");
@@ -67,8 +67,8 @@ app.get('/delete',urlencodedParser, (req, res) => {
 MongoClient.connect(url, function(err, db) {
   if (err) throw err;
   var dbo = db.db("mydb");
- 
-  dbo.collection("tasks").deleteOne({id:req.body.id}, function(err, obj) {
+
+  dbo.collection("notes").deleteOne({id:req.body.id}, function(err, obj) {
     if (err) throw err;
     console.log("1 document deleted");
     db.close();
