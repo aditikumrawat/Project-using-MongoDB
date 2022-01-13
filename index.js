@@ -9,7 +9,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false })
 var tasks;
 const session = require('express-session');
 var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb+srv://user2:coolpassword@cluster0.flkio.mongodb.net/firstdb?retryWrites=true&w=majority";
+var url = "mongo connection url";
 app.set('view engine', 'ejs');
 
 app.use(session({
@@ -91,13 +91,13 @@ passport.deserializeUser(function(obj, cb) {
 /*  Google AUTH  */
  
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-const GOOGLE_CLIENT_ID = '118028452917-euet4ah5nhl5ga1a8tfc9qq2lovqa4ft.apps.googleusercontent.com';
-const GOOGLE_CLIENT_SECRET = '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';
+const GOOGLE_CLIENT_ID = 'yourid';
+const GOOGLE_CLIENT_SECRET = 'your id';
 
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "https://replyapp2.dhruvpatil.repl.co/auth/google/callback"
+    callbackURL: "https://localhost:3000"
   },
   function(accessToken, refreshToken, profile, done) {
       userProfile=profile;
